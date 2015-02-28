@@ -1,7 +1,6 @@
 import java.util.*;
 
 
-
 interface ListMapper<E> {
 	E mapperCallback(E element, int index, List<E> list);
 }

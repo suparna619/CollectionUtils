@@ -4,3 +4,4 @@ IntegerMapperUtil.class
 ListMapper.class
 junit-4.10.jar
 compileRun.sh
+toLowerCaseMapper.class
