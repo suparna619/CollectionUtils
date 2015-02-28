@@ -5,3 +5,9 @@ ListMapper.class
 junit-4.10.jar
 compileRun.sh
 toLowerCaseMapper.class
+IntegerSquarMapperUtil.class
+IntergerFilterForEvenUtil.class
+ListFilter.class
+StringFilterForEvenUtil.class
+ToLowerCaseMapperUtil.class
+spikes.class
