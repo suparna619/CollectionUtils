@@ -1,8 +1,8 @@
 import java.util.*;
 
 
-interface ListMapper<E> {
-	E mapperCallback(E element, int index, List<E> list);
+interface ListMapper<E, K> {
+	K mapperCallback(E element, int index, List<E> list);
 }
 
 interface ListFilter<E> {
@@ -10,15 +10,15 @@ interface ListFilter<E> {
 }
 
 public class CollectionUtils<E> {
-	
-	public static<E> List<E> map(List<E> list, ListMapper mapper) {
-		List<E> resultArray = new ArrayList();
+
+	public static<E,K> List<K> map(List<E> list, ListMapper<E,K> mapper) {
+		List<K> result = new ArrayList<K>();
 		int index = 0;
 		for(E element : list) {
-			E returnElement = (E)mapper.mapperCallback(element, index++, list);
-			resultArray.add(returnElement);
+			K returnElement = mapper.mapperCallback(element, index++, list);
+			result.add(returnElement);
 		}
-		return resultArray;
+		return result;
 	}
 
 	public static<E> List<E> filter(List<E> list, ListFilter filtration) {
