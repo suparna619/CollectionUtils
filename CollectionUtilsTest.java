@@ -35,9 +35,15 @@ class IntergerFilterForEvenUtil implements ListFilter<Integer> {
 	}
 }
 
-class StringFilterForEvenUtil implements ListFilter<String> {
+class StringFilterUtil implements ListFilter<String> {
 	public boolean filterCallback(String element, int index, List<String> list) {
 		return ((int)element.charAt(0) > 97);
+	}
+}
+
+class IntSumReducerUtil implements ListReducer<Integer,Integer> {
+	public Integer reducerCallback(Integer pv, Integer cv , int index, List<Integer> list) {
+		return pv.intValue()+cv.intValue();
 	}
 }
 
@@ -74,7 +80,7 @@ public class CollectionUtilsTest {
 	}
 
 	@Test
-	public void map_returns_the_squar_of_each_elements_of_a_intArray_list(){
+	public void map_returns_the_squar_of_each_elements_of_an_intArray_list(){
 		ListMapper listMapper = new IntegerSquarMapperUtil();
 		List<Integer> intArray = new ArrayList<Integer>();
 		
@@ -104,7 +110,7 @@ public class CollectionUtilsTest {
 	}
 
 	@Test
-	public void filter_returns_only_the_even_elements_of_a_intArray_list(){
+	public void filter_returns_only_the_even_elements_of_an_intArray_list(){
 		ListFilter listFilter = new IntergerFilterForEvenUtil();
 		List<Integer> intArray = new ArrayList<Integer>();
 		
@@ -118,7 +124,7 @@ public class CollectionUtilsTest {
 
 	@Test
 	public void filter_returns_only_the_String_elements_started_with_small_letters_stringArray_list(){
-		ListFilter<String> listFilter = new StringFilterForEvenUtil();
+		ListFilter listFilter = new StringFilterUtil();
 		List<String> stringArray = new ArrayList<String>();
 		
 		stringArray.add("under world authority");
@@ -128,5 +134,19 @@ public class CollectionUtilsTest {
 		List<String> result = CollectionUtils.<String>filter(stringArray,listFilter);
 		assertEquals((String)"under world authority",result.get(0));
 		assertEquals((String)"chandrabindu",result.get(1));
-	}	
+	}
+
+	@Test
+	public void reduce_returns_sum_of_the_elements_of_an_intArray_list(){
+		ListReducer listReducer = new IntSumReducerUtil();
+		List<Integer> intArray = new ArrayList<Integer>();
+		Integer initial = new Integer(0);
+
+		intArray.add(1);
+		intArray.add(2);
+		intArray.add(3);
+
+		Integer sum = CollectionUtils.<Integer,Integer>reduce(intArray,listReducer,initial);		
+		assertEquals((Integer)6,sum);
+	}
 }

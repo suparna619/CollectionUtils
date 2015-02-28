@@ -9,6 +9,10 @@ interface ListFilter<E> {
 	boolean filterCallback(E element, int index, List<E> list);
 }
 
+interface ListReducer<E,K> {
+	K reducerCallback(K pv, E cv, int index, List<E> list);
+}
+
 public class CollectionUtils<E> {
 
 	public static<E,K> List<K> map(List<E> list, ListMapper<E,K> mapper) {
@@ -31,4 +35,13 @@ public class CollectionUtils<E> {
 		}
 		return resultArray;
 	}
+
+	public static<E,K> K reduce(List<E> list, ListReducer<E,K> reducer, K p_v) {
+		int index = 0;
+		for (E c_v : list) {
+			p_v = reducer.reducerCallback(p_v, c_v, index++, list);
+		}
+		return p_v;
+	}
 }
+

@@ -12,3 +12,6 @@ StringFilterForEvenUtil.class
 ToLowerCaseMapperUtil.class
 spikes.class
 IntegerToStingMapperUtil.class
+IntSumReducerUtil.class
+ListReducer.class
+StringFilterUtil.class
